@@ -2,11 +2,14 @@ import sqlite3
 import datetime
 import os
 
-# Default to the src directory if not specified
-DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), 'bot_interactions.db')
+# Define the path inside the Modal volume
+DB_PATH_IN_VOLUME = "/data/db/discord-answer-logs.db"
 
 def get_db_path():
-    return os.environ.get('DISCORD_BOT_DB_PATH', DEFAULT_DB_PATH)
+    # Always return the path inside the volume when running in Modal
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(DB_PATH_IN_VOLUME), exist_ok=True)
+    return DB_PATH_IN_VOLUME
 
 def get_connection():
     return sqlite3.connect(get_db_path())
@@ -31,15 +34,18 @@ def init_db():
     finally:
         conn.close()
 
-def log_interaction(user_id, channel_id, question, response, thread_id=None):
+def log_interaction(user_id, channel_id, question, response, timestamp=None, feedback=None, thread_id=None):
     conn = get_connection()
     c = conn.cursor()
     try:
-        timestamp = datetime.datetime.now().isoformat()
+        # Use provided timestamp or generate current time
+        if timestamp is None:
+            timestamp = datetime.datetime.now().isoformat()
+            
         c.execute('''
-            INSERT INTO interactions (timestamp, user_id, channel_id, question, response, thread_id)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (timestamp, str(user_id), str(channel_id), question, response, str(thread_id) if thread_id else None))
+            INSERT INTO interactions (timestamp, user_id, channel_id, question, response, feedback, thread_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (timestamp, str(user_id), str(channel_id), question, response, feedback, str(thread_id) if thread_id else None))
         conn.commit()
         return c.lastrowid
     finally:

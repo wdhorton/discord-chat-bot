@@ -1,0 +1,40 @@
+Starting Discord bot...
+[30;1m2025-04-25 23:31:14[0m [34;1mINFO    [0m [35mdiscord.client[0m logging in using static token
+ * Serving Flask app ''
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.142.0.2:8000
+[33mPress CTRL+C to quit[0m
+[30;1m2025-04-25 23:31:15[0m [33;1mWARNING [0m [35mdiscord.client[0m Application has an interaction endpoint URL set, this means registered components and app commands will not be received by the library.
+Traceback (most recent call last):
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/src/discord_app.py", line 129, in <module>
+    run_discord_bot()
+    ~~~~~~~~~~~~~~~^^
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/src/discord_app.py", line 124, in run_discord_bot
+    client.run(discord_token)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/.venv/lib/python3.13/site-packages/discord/client.py", line 906, in run
+    asyncio.run(runner())
+    ~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/.venv/lib/python3.13/site-packages/discord/client.py", line 895, in runner
+    await self.start(token, reconnect=reconnect)
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/.venv/lib/python3.13/site-packages/discord/client.py", line 824, in start
+    await self.connect(reconnect=reconnect)
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/.venv/lib/python3.13/site-packages/discord/client.py", line 748, in connect
+    raise PrivilegedIntentsRequired(exc.shard_id) from None
+discord.errors.PrivilegedIntentsRequired: Shard ID None is requesting privileged intents that have not been explicitly enabled in the developer portal. It is recommended to go to https://discord.com/developers/applications/ and explicitly enable the privileged intents within your application's page. If this is not possible, then consider disabling the privileged intents instead.
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/threading.py", line 1540, in _shutdown
+    _thread_shutdown()
+KeyboardInterrupt:

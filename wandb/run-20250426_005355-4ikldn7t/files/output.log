@@ -1,0 +1,25 @@
+2025-04-26 00:53:56,212 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+Starting Discord bot...
+[30;1m2025-04-26 00:53:56[0m [34;1mINFO    [0m [35mdiscord.client[0m logging in using static token
+2025-04-26 00:53:56,214 - discord.client - INFO - logging in using static token
+ * Serving Flask app ''
+ * Debug mode: off
+2025-04-26 00:53:56,223 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.142.0.2:8000
+2025-04-26 00:53:56,223 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+[30;1m2025-04-26 00:53:57[0m [34;1mINFO    [0m [35mdiscord.gateway[0m Shard ID None has connected to Gateway (Session ID: 05ae696fbaca12512360c2c37c19a658).
+2025-04-26 00:53:57,008 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 05ae696fbaca12512360c2c37c19a658).
+2025-04-26 00:54:15,832 - vector_embeddings - ERROR - Error initializing ChromaDB client: [Errno 13] Permission denied: '/data'
+Traceback (most recent call last):
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/src/vector_emb.py", line 46, in __enter__
+    os.makedirs(self.path, exist_ok=True)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 217, in makedirs
+  File "<frozen os>", line 227, in makedirs
+PermissionError: [Errno 13] Permission denied: '/data'
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/threading.py", line 1540, in _shutdown
+    _thread_shutdown()
+KeyboardInterrupt:

@@ -1,0 +1,22 @@
+2025-04-25 23:46:16,352 INFO    MainThread:6346 [wandb_setup.py:_flush():67] Current SDK version is 0.19.9
+2025-04-25 23:46:16,352 INFO    MainThread:6346 [wandb_setup.py:_flush():67] Configure stats pid to 6346
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_setup.py:_flush():67] Loading settings from /home/pastor/.config/wandb/settings
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_setup.py:_flush():67] Loading settings from /home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/wandb/settings
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_init.py:setup_run_log_directory():662] Logging user logs to /home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/wandb/run-20250425_234616-fvatefbr/logs/debug.log
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_init.py:setup_run_log_directory():663] Logging internal logs to /home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/wandb/run-20250425_234616-fvatefbr/logs/debug-internal.log
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_init.py:init():781] calling init triggers
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_init.py:init():786] wandb.init called with sweep_config: {}
+config: {'bot_version': '1.0.1', 'model': 'gpt-3.5-turbo-16k', '_wandb': {}}
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_init.py:init():809] starting backend
+2025-04-25 23:46:16,353 INFO    MainThread:6346 [wandb_init.py:init():813] sending inform_init request
+2025-04-25 23:46:16,357 INFO    MainThread:6346 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-04-25 23:46:16,357 INFO    MainThread:6346 [wandb_init.py:init():823] backend started and connected
+2025-04-25 23:46:16,359 INFO    MainThread:6346 [wandb_init.py:init():915] updated telemetry
+2025-04-25 23:46:16,366 INFO    MainThread:6346 [wandb_init.py:init():939] communicating run to backend with 90.0 second timeout
+2025-04-25 23:46:16,688 INFO    MainThread:6346 [wandb_init.py:init():1014] starting run threads in backend
+2025-04-25 23:46:16,836 INFO    MainThread:6346 [wandb_run.py:_console_start():2454] atexit reg
+2025-04-25 23:46:16,836 INFO    MainThread:6346 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-04-25 23:46:16,836 INFO    MainThread:6346 [wandb_run.py:_redirect():2371] Wrapping output streams.
+2025-04-25 23:46:16,836 INFO    MainThread:6346 [wandb_run.py:_redirect():2394] Redirects installed.
+2025-04-25 23:46:16,838 INFO    MainThread:6346 [wandb_init.py:init():1056] run started, returning control to user process

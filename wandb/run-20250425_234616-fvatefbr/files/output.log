@@ -1,0 +1,23 @@
+Starting Discord bot...
+[30;1m2025-04-25 23:46:16[0m [34;1mINFO    [0m [35mdiscord.client[0m logging in using static token
+ * Serving Flask app ''
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.142.0.2:8000
+[33mPress CTRL+C to quit[0m
+[30;1m2025-04-25 23:46:17[0m [34;1mINFO    [0m [35mdiscord.gateway[0m Shard ID None has connected to Gateway (Session ID: 3ec30fb20a9ef50740189285ed6f5e5f).
+Retrieved existing collection 'workshop_chunks'
+Retrieved existing collection 'workshop_chunks'
+Retrieved 0 tokens of relevant context
+Retrieved 0 source chunks
+Exception ignored in sys.unraisablehookException ignored in atexit callback <function _start_and_connect_service.<locals>.teardown_atexit at 0x706008a3b6a0>:
+Traceback (most recent call last):
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/.venv/lib/python3.13/site-packages/wandb/sdk/lib/service_connection.py", line 94, in teardown_atexit
+    conn.teardown(hooks.exit_code)
+  File "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/.venv/lib/python3.13/site-packages/wandb/sdk/lib/service_connection.py", line 199, in teardown
+    def teardown(self, exit_code: int) -> int:
+  File "/usr/lib/python3.13/asyncio/runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt:

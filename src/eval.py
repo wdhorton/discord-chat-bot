@@ -1,18 +1,18 @@
 from openai import OpenAI
 import asyncio
-import os
-from discord_app import load_vtt_content, answer_question_basic, MAX_CHARS
+from vector_emb import answer_question, llm_answer_question
 
 client_openai = OpenAI()
 
 async def main(message_content):
-    transcript_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "WS1-C2.vtt")  # Add the path to your transcript file
-    workshop_context = load_vtt_content(transcript_file)
-    original_length = len(workshop_context)
-    if original_length > MAX_CHARS:
-        workshop_context = workshop_context[:MAX_CHARS]
+    # Get context for the question
+    context = answer_question(message_content)
+        
+    # Ensure context is a string to avoid NoneType errors
+    if context is None:
+        context = "No specific context found."
 
-    response = await answer_question_basic(client_openai, workshop_context, message_content)
+    response = llm_answer_question(context, message_content)
     return response
 
 if __name__ == "__main__":

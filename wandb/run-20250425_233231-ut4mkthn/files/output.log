@@ -1,0 +1,18 @@
+Starting Discord bot...
+[30;1m2025-04-25 23:32:32[0m [34;1mINFO    [0m [35mdiscord.client[0m logging in using static token
+ * Serving Flask app ''
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.142.0.2:8000
+[33mPress CTRL+C to quit[0m
+[30;1m2025-04-25 23:32:37[0m [34;1mINFO    [0m [35mdiscord.gateway[0m Shard ID None has connected to Gateway (Session ID: 7e132e22458f7786d1126b68ed018bcc).
+Retrieved existing collection 'workshop_chunks'
+Creating new collection 'workshop_chunks'
+Retrieved 0 tokens of relevant context
+Retrieved 0 source chunks
+Traceback (most recent call last):
+  File "/usr/lib/python3.13/threading.py", line 1540, in _shutdown
+    _thread_shutdown()
+KeyboardInterrupt:

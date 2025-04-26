@@ -1,0 +1,15 @@
+{"time":"2025-04-25T23:54:55.943415871Z","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/wandb/run-20250425_235455-r2e02gxl/logs/debug-core.log"}
+{"time":"2025-04-25T23:54:56.116516706Z","level":"INFO","msg":"created new stream","id":"r2e02gxl"}
+{"time":"2025-04-25T23:54:56.116592966Z","level":"INFO","msg":"stream: started","id":"r2e02gxl"}
+{"time":"2025-04-25T23:54:56.116630093Z","level":"INFO","msg":"writer: Do: started","stream_id":"r2e02gxl"}
+{"time":"2025-04-25T23:54:56.116738597Z","level":"INFO","msg":"sender: started","stream_id":"r2e02gxl"}
+{"time":"2025-04-25T23:54:56.116832006Z","level":"INFO","msg":"handler: started","stream_id":"r2e02gxl"}
+{"time":"2025-04-25T23:54:56.229560905Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-25T23:55:31.539195526Z","level":"INFO","msg":"stream: closing","id":"r2e02gxl"}
+{"time":"2025-04-25T23:55:31.53922983Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-25T23:55:31.539315539Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-25T23:55:31.930512998Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-25T23:55:32.047289331Z","level":"INFO","msg":"handler: closed","stream_id":"r2e02gxl"}
+{"time":"2025-04-25T23:55:32.047353678Z","level":"INFO","msg":"sender: closed","stream_id":"r2e02gxl"}
+{"time":"2025-04-25T23:55:32.047336692Z","level":"INFO","msg":"writer: Close: closed","stream_id":"r2e02gxl"}
+{"time":"2025-04-25T23:55:32.047470517Z","level":"INFO","msg":"stream: closed","id":"r2e02gxl"}

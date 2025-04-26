@@ -1,0 +1,31 @@
+{
+  "os": "Linux-6.14.0-1006-gcp-x86_64-with-glibc2.41",
+  "python": "CPython 3.13.3",
+  "startedAt": "2025-04-25T23:31:47.112821Z",
+  "program": "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/src/discord_app.py",
+  "codePath": "src/discord_app.py",
+  "git": {
+    "remote": "https://github.com/sotoblanco/discord-chat-bot.git",
+    "commit": "5a2b706755c0ce5ff5c0e2f058598737a13ebabb"
+  },
+  "email": "sotoblanco263542@gmail.com",
+  "root": "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot",
+  "host": "instance-20250420-222143",
+  "executable": "/home/pastor/projects/ai_sdlc_april_2025/discord-chat-bot/.venv/bin/python",
+  "codePathLocal": "src/discord_app.py",
+  "cpu_count": 2,
+  "cpu_count_logical": 4,
+  "disk": {
+    "/": {
+      "total": "30010245120",
+      "used": "6795153408"
+    }
+  },
+  "memory": {
+    "total": "16766959616"
+  },
+  "cpu": {
+    "count": 2,
+    "countLogical": 4
+  }
+}
