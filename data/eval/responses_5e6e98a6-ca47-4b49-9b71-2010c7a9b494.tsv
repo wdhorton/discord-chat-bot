@@ -1,0 +1,42 @@
+Model	Question	Response
+gpt-3.5-turbo-16k	"What are the key learning outcomes of this workshop series on LLM-powered applications?
+"	"The key learning outcomes of this workshop series on LLM-powered applications are:
+1. Understanding the foundations of LLM software and evaluation-driven development.
+2. Learning how to build software powered by machine learning and LLMs.
+3. Gaining knowledge on prompt engineering, embeddings, and fine-tuning business logic when deploying LLM-powered software.
+4. Understanding the importance of unit tests, versioning, and continuous integration in the deployment process.
+5. Learning about tracing and general observability when monitoring LLM-powered software.
+6. Understanding how to evaluate LLM calls in relation to business metrics.
+7. Learning how to iterate, debug, and adapt LLM-powered applications.
+8. Gaining knowledge on building synthetic data sets and evaluation harnesses to evaluate systems before real users exist.
+9. Understanding the importance of logging, monitoring, and tracing in capturing data and evaluating system performance.
+10. Learning how to iterate quickly using prompt engineering and potentially fine-tuning and changing business logic."
+gpt-3.5-turbo-16k	"How is this course different from others that focus on tools like LangChain or agentic frameworks?
+"	This course is different from others that focus on tools like LangChain or agentic frameworks. The focus of this course is on workflows, iteration, and hands-on development, rather than on specific tools or trends. The course aims to teach students how to iterate, debug, and adapt their machine learning-powered apps, rather than following step-by-step templates. The course also emphasizes the non-deterministic nature of these systems, observability, testing, and evaluation.
+gpt-3.5-turbo-16k	"Will the course include hands-on projects or just lectures?
+"	Based on the provided sections of the workshop transcript, the course includes hands-on development and focuses on workflows and iteration.
+gpt-3.5-turbo-16k	"How do you balance theory and practice in the course?
+"	The transcript sections do not provide information about how theory and practice are balanced in the course.
+gpt-3.5-turbo-16k	"How is this course tailored for both data scientists and software engineers?
+"	This course is tailored for both data scientists and software engineers by focusing on building Llm-powered applications. The course aims to teach participants how to build production-grade systems that scale beyond proof of concepts and demos. It emphasizes workflows, iteration, and hands-on development, as well as the non-deterministic nature of these systems, observability, testing, and evaluation. The course also includes guest lectures from practitioners in the field.
+gpt-3.5-turbo-16k	"What is the duration of the course?
+"	The duration of the course is not mentioned in the provided sections of the workshop transcript.
+gpt-3.5-turbo-16k	"Can you explain what “evaluation-driven development” means in more detail?
+"	"Evaluation-driven development refers to a development approach that emphasizes the continuous evaluation and improvement of machine learning systems. It involves building, monitoring, evaluating, and improving the system in an iterative loop. The goal is to ensure that the system performs well and meets the desired objectives.
+
+In evaluation-driven development, the focus is on developing a robust evaluation system to assess the performance of the system. This includes collecting real-world examples, labeling responses, and building an evaluation harness or test set. The evaluation process involves measuring various metrics, such as latency, cost, and business outcomes, to guide improvements.
+
+The key idea is to align the evaluation process with the development process, allowing for quick iterations and improvements based on performance feedback. By continuously evaluating and improving the system, developers can ensure that it meets the desired goals and remains effective over time."
+gpt-3.5-turbo-16k	"What are some examples of an “evaluation harness” mentioned in the intro?
+"	"An example of an ""evaluation harness"" mentioned in the transcript is a script or something reproducible that is used to evaluate a system. In the context of the workshop, it is mentioned that a basic harness with a few tests can be used to measure latency, cost, and other business-related metrics to evaluate the performance of a system."
+gpt-3.5-turbo-16k	"How do you measure success in a non-deterministic LLM system?
+"	In a non-deterministic LLM system, success is measured by monitoring and evaluating the system's performance and iterating rapidly based on the results. It is important to not only monitor the quality of individual LLM calls but also how they relate to the business metrics that need to be met.
+gpt-3.5-turbo-16k	"What’s the difference between fine-tuning, prompting, and using embeddings?
+"	"Fine-tuning, prompting, and using embeddings are different techniques used in machine learning.
+
+Fine-tuning refers to the process of taking a pre-trained model and further training it on a specific task or dataset. It involves adjusting the parameters of the model to make it more accurate or suitable for a particular use case.
+
+Prompting involves providing specific instructions or queries to the language model to guide its responses. By crafting effective prompts, developers can influence the output of the model and improve its performance.
+
+Embeddings are representations of words or phrases in a numerical form that capture their semantic meaning. Embeddings are used to encode text data into a format that can be processed by machine learning models. They help in understanding the relationships between words and improving the performance of language models."
+gpt-3.5-turbo-16k	Could you explain how observability applies to LLM apps?	Observability is an important principle in building LLM (Language Model) apps. It involves logging, monitoring, and tracing the system to capture data in a human-readable form. By evaluating the data and results, developers can quantify the performance of the LLM app. This evaluation includes domain expertise, binary classification, and classifying failure modes. The goal is to iterate quickly and make improvements based on the evaluation.

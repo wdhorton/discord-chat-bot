@@ -1,0 +1,68 @@
+Model	Question	Response
+gemini-1.5-flash	"What are the key learning outcomes of this workshop series on LLM-powered applications?
+"	"The key learning outcomes of this workshop series on LLM-powered applications are:
+- Understanding the foundations of LLM software and evaluation-driven development
+- Learning how to build software powered by machine learning and LLMs
+- Gaining knowledge on prompt engineering, embeddings, and fine-tuning business logic
+- Understanding the importance of unit tests, versioning, and continuous integration when deploying LLM-powered software
+- Learning about tracing and general observability when monitoring LLM-powered software
+- Understanding how to evaluate LLM calls and their impact on business metrics
+- Learning how to iterate, debug, and adapt LLM-powered applications
+- Gaining knowledge on building synthetic data sets and evaluation harnesses for pre-launch evaluation
+- Understanding the principles of logging, monitoring, tracing, and capturing data in a human-readable form
+- Learning how to evaluate and quantify performance using domain expertise and binary classification
+- Gaining knowledge on prompt engineering, fine-tuning, and changing business logic for iteration
+- Understanding the iterative process of LLM-powered application development and production"
+gemini-1.5-flash	"How is this course different from others that focus on tools like LangChain or agentic frameworks?
+"	This course is different from others that focus on tools like LangChain or agentic frameworks. The focus of this course is on workflows, iteration, and hands-on development, rather than on specific tools or trends. The course aims to teach students how to iterate, debug, and adapt their machine learning-powered apps, rather than following step-by-step templates. The course also emphasizes the non-deterministic nature of these systems, observability, testing, and evaluation, which are considered the backbones of AI systems.
+gemini-1.5-flash	"Will the course include hands-on projects or just lectures?
+"	Based on the provided sections of the workshop transcript, the course includes hands-on development and focuses on workflows and iteration.
+gemini-1.5-flash	"How do you balance theory and practice in the course?
+"	The transcript sections do not provide information about how theory and practice are balanced in the course.
+gemini-1.5-flash	"How is this course tailored for both data scientists and software engineers?
+"	This course is tailored for both data scientists and software engineers by focusing on building Llm-powered applications. The course aims to teach participants how to build production-grade systems that scale beyond proof of concepts and demos. It emphasizes workflows, iteration, and hands-on development, as well as the non-deterministic nature of these systems, observability, testing, and evaluation. The course also includes guest lectures from practitioners in the field.
+gemini-1.5-flash	"What is the duration of the course?
+"	"The provided text doesn't state the exact duration of the course.  However, it mentions a ""cohort"" and implies that the course is spread out over time, with multiple workshops.  The speaker mentions seeing participants again ""in 46 hours for the next workshop,"" suggesting the course is not a single session.  More information is needed to determine the overall length of the course.
+"
+gemini-1.5-flash	"Can you explain what “evaluation-driven development” means in more detail?
+"	"Evaluation-driven development (EDD) is a software development approach, particularly relevant for Large Language Model (LLM)-powered applications, that prioritizes rigorous and iterative evaluation throughout the entire development lifecycle.  Instead of focusing solely on building features first, EDD emphasizes building robust evaluation systems *concurrently* with development.  This allows for early detection and correction of issues, preventing the kind of problems highlighted at the beginning of the transcript, where a flashy demo masked underlying functionality flaws.
+
+The core of EDD is a continuous loop of: **build, monitor, evaluate, improve**.  This cycle starts early, even before a Minimum Viable Product (MVP) is launched, by using synthetic data and evaluation harnesses (scripts for automated evaluation) to test the system.  A ""Minimum Viable Evaluation"" (MVE) is created alongside the MVP, establishing a baseline for measuring performance.
+
+The evaluation itself may involve various methods:
+
+* **Hand-labeling:** Initially, human judgment is used to label outputs (e.g., correct/incorrect, good/bad). This is then used to train an evaluation harness.
+* **LLM as a judge:**  As the system develops, an LLM can be used to automate parts of the evaluation process, judging the outputs based on provided examples and heuristics. This scales the evaluation process beyond manual labeling.
+* **Multi-level evaluation:** EDD considers evaluations across multiple levels, from micro-level LLM calls and specific prompt responses to macro-level business outcomes (e.g., did the system improve the efficiency of a process?).  Connecting these levels is crucial.
+
+The key difference between EDD and traditional software development is the constant, iterative evaluation baked into the process from the very beginning. Traditional software might have a more linear process (specs, build, test, deploy, monitor), whereas EDD constantly loops back to improve based on continuous evaluation data.  This is especially important for LLMs because their outputs are highly dependent on inputs and subtle changes can lead to significant variations in performance.  Therefore, continuous monitoring and evaluation are essential to ensure reliability and robustness.
+"
+gemini-1.5-flash	"What are some examples of an “evaluation harness” mentioned in the intro?
+"	"Based on the provided text, examples of evaluation harnesses include:
+
+1. **A script with tests measuring latency and cost:** This is mentioned in the context of comparing GPT-4.0 Mini and Gemini 2.5, highlighting the importance of objective metrics beyond subjective ""vibes.""
+
+2. **A basic evaluation harness with a test set and an LLM as a judge:** This is described as a part of a Minimum Viable Evaluation (MVE), where hand-labeled data is used to create a system for automated evaluation.  The LLM acts as a judge by evaluating outputs based on provided examples and heuristics.
+
+The text emphasizes that even a basic harness, providing objective, measurable, and repeatable evaluations, is far superior to relying on subjective feelings or ""vibes"" when assessing model performance.
+"
+gemini-1.5-flash	"How do you measure success in a non-deterministic LLM system?
+"	In a non-deterministic LLM system, success is measured by monitoring and evaluating the system's performance and iterating rapidly based on that evaluation. It is important to not only monitor the quality of individual LLM calls but also how they relate to the business metrics that the system is trying to achieve.
+gemini-1.5-flash	"What’s the difference between fine-tuning, prompting, and using embeddings?
+"	"Fine-tuning, prompting, and using embeddings are different techniques used in machine learning.
+
+Fine-tuning refers to the process of taking a pre-trained model and further training it on a specific task or dataset. It involves adjusting the parameters of the model to make it more accurate or suitable for a particular use case.
+
+Prompting involves providing specific instructions or queries to the language model to guide its responses. By crafting effective prompts, developers can influence the output of the model and improve its performance in generating desired results.
+
+Embeddings are representations of words or phrases in a numerical form that capture their semantic meaning. Embeddings are used to encode text data into a format that can be processed by machine learning models. They help in capturing the relationships and similarities between words, which is useful for tasks like language understanding and generation."
+gemini-1.5-flash	Could you explain how observability applies to LLM apps?	"Observability in LLM apps is crucial due to the non-deterministic nature of LLMs.  Unlike traditional software development where specifications are written upfront, LLM applications require a rapid iterative cycle of building, deploying, monitoring, evaluating, and iterating.  Observability plays a key role in the monitoring and evaluation phases.  It involves:
+
+* **Tracing:** Tracking the flow of data and execution within the LLM application, from the initial prompt and context to the LLM's output and its downstream consumption.  This includes understanding the internal workings of tools like Llama index, which might perform chunking, embeddings, and retrieval—processes not immediately apparent to the user.  This is especially important when the prompt itself is not easily accessible or understandable.
+
+* **Logging and Monitoring:** Capturing data in a human-readable format, allowing for efficient analysis of performance.  This includes monitoring individual LLM calls (latency, cost) and how they relate to overall business metrics (e.g., successful hiring in a recruitment app).
+
+* **Evaluating:**  This goes beyond simply monitoring performance. It requires quantifying performance, using domain expertise, binary classification, and identifying failure modes. This could involve comparing LLM-generated outputs to those of human experts (e.g., comparing emails generated by the LLM to emails written by experienced recruiters).  Evaluation also needs to connect micro-level LLM call performance to macro-level business outcomes.
+
+The speaker emphasizes building a ""Minimum Viable Evaluation"" (MVE) alongside the Minimum Viable Product (MVP). The MVE provides a framework for early and frequent evaluation, even before real user data is available, using synthetic data and evaluation harnesses.  The ability to easily observe and evaluate the performance of an LLM application is fundamental to its iterative improvement and success.
+"
