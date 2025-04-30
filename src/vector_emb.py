@@ -14,7 +14,7 @@ CHROMA_DB_PATH = "chroma_db"
 EMBEDDING_MODEL = "text-embedding-3-small"
 DEFAULT_MAX_TOKENS = 12000
 DEFAULT_MAX_CHUNKS = 5
-COMPLETION_MODEL = "gpt-3.5-turbo-16k"
+COMPLETION_MODEL = "gpt-4o-mini"
 
 SYSTEM_PROMPT = """You are a helpful workshop assistant.
 Answer questions based only on the workshop transcript sections provided.
@@ -246,7 +246,6 @@ def get_context_for_question(question, collection_name=COLLECTION_NAME, max_chun
     
     return context, sources, chunks  # Return the raw chunks as well for logging
 
-
 def process_workshop(transcript_path, collection_name=COLLECTION_NAME):
     """Process a workshop transcript and store it in the vector database"""
     # Create chunks from workshop transcript
@@ -273,6 +272,7 @@ def process_workshop(transcript_path, collection_name=COLLECTION_NAME):
     
     return len(chunks)
 
+# ====== Answer questions based on context ====== #
 def answer_question(question):
     """
     Answers a question based on the workshop transcript
@@ -302,10 +302,12 @@ def answer_question(question):
     print(f"Retrieved {num_chunks} source chunks")
     
     #start_time = time.time()  # Start timing from before API call
-    return context
-    # Generate a response from the LLM using the context
+    return context, sources, chunks  # Return sources for further processing
 
-def llm_answer_question(context, question):
+def llm_answer_question(client, context, sources, chunks, question):
+
+    num_chunks = len(sources)
+    
     client = get_openai_client()
     try:
         # Make the API call
@@ -318,31 +320,25 @@ def llm_answer_question(context, question):
             temperature=0
         )
         
-        answer = response.choices[0].message.content
+        message = response.choices[0].message.content
         
         #Get token usage
-        # completion_tokens = response.usage.completion_tokens if hasattr(response, 'usage') else 0
-        # prompt_tokens = response.usage.prompt_tokens if hasattr(response, 'usage') else context_tokens
-
-        # # Format source information
-        # source_text = format_sources(sources)
+        completion_tokens = response.usage.completion_tokens if hasattr(response, 'usage') else 0
+        prompt_tokens = response.usage.prompt_tokens if hasattr(response, 'usage') else context_tokens
         
         # # Record metrics
-        # context_info = {
-        #     "num_chunks": num_chunks,
-        #     "context_tokens": prompt_tokens,
-        #     "completion_tokens": completion_tokens,
-        #     "embedding_tokens": num_chunks * 1536,  # Estimate based on embedding dimensions
-        #     "chunks": chunks
-        # }
+        context_info = {
+             "num_chunks": num_chunks,
+             "context_tokens": prompt_tokens,
+             "completion_tokens": completion_tokens,
+             "embedding_tokens": num_chunks * 1536,  # Estimate based on embedding dimensions
+             "chunks": chunks
+         }
 
-        # print(f"Context Information: {context_info}")
+        print(f"Context Information: {context_info}")
         
-        return answer
+        return message, context_info
 
     except Exception as e:
         error_message = f"Sorry, an error occurred: {str(e)}"
         return error_message
-
-
-

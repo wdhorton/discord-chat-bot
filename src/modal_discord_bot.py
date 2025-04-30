@@ -41,8 +41,8 @@ import time  # Import for tracking start and end times
 from enum import Enum
 
 import modal
-from vector_emb import answer_question, SYSTEM_PROMPT, COMPLETION_MODEL
-from database import log_interaction, init_db, get_db_path, log_track_interaction, get_all_logs_stats
+from vector_emb import answer_question, COMPLETION_MODEL, llm_answer_question
+from database import log_interaction, init_db, get_db_path, log_track_interaction
 
 image = (modal.Image.debian_slim(python_version="3.11").pip_install(
     "fastapi[standard]==0.115.9", "pynacl~=1.5.0", "requests~=2.32.3", "openai~=1.75.0",
@@ -54,7 +54,6 @@ app = modal.App("example-discord-bot", image=image)
 # Define persistent volume for logs - CORRECTED TYPO
 logs_db_storage = modal.Volume.from_name("discord-logs", create_if_missing=True)
 
-from openai import AsyncOpenAI
 
 @app.function(secrets=[modal.Secret.from_name("openai-secret")])
 @modal.concurrent(max_inputs=1000)
@@ -73,50 +72,25 @@ async def fetch_api(question: str) -> str:
         - Limited to 500 tokens for concise answers
         - Handles API errors gracefully with formatted error messages
     """
+    from openai import AsyncOpenAI
     client = AsyncOpenAI()
 
     try:
         # Get context for the question
-        context = answer_question(question)
+        context, sources, chunks = answer_question(question)
         
         # Ensure context is a string to avoid NoneType errors
         if context is None:
             context = "No specific context found."
-        
-        # Make a single API call with both system prompt and context
-        response = await client.chat.completions.create(
-            model=COMPLETION_MODEL,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": f"Workshop Transcript Sections:\n{context}\n\nQuestion: {question}"}
-            ],
-            max_tokens=500,
-            temperature=0
-        )
-        
-        message = response.choices[0].message.content
-        
-        # Return both the message and tokens used for logging purposes
-        context_info = {
-            "context_tokens": response.usage.prompt_tokens if hasattr(response, 'usage') else 0,
-            "completion_tokens": response.usage.completion_tokens if hasattr(response, 'usage') else 0,
-            "embedding_tokens": 1536,  # Estimate based on embedding dimensions
-            "num_chunks": 1,
-            "chunks": []  # Empty for now, could be populated with actual chunks later
-        }
-        
+                
+                
+        message, context_info = llm_answer_question(client, context, sources, chunks, question)
+
         return message, context_info
+
     except Exception as e:
-        message = f"# 🤖: Oops! {e}"
-        # Return empty context_info in case of error
-        context_info = {
-            "context_tokens": 0,
-            "completion_tokens": 0,
-            "embedding_tokens": 0,
-            "num_chunks": 0,
-            "chunks": []
-        }
-        return message, context_info
+        error_message = f"Sorry, an error occurred: {str(e)}"
+        return error_message
 
 @app.local_entrypoint()
 def test_fetch_api():
