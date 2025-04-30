@@ -1,4 +1,3 @@
-from openai import OpenAI
 import asyncio
 from vector_emb import answer_question, COMPLETION_MODEL
 import os
@@ -12,6 +11,7 @@ If you don't know the answer or can't find it in the provided sections, say so."
 model_name = COMPLETION_MODEL
 
 def llm_answer_question(context, question):
+    from openai import OpenAI
     client_openai = OpenAI()
     try:
         # Make the API call

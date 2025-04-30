@@ -4,8 +4,11 @@ import os
 
 # Use hyphenated name to match the actual file (discord-answer-logs.db)
 DB_FILE = "discord-answer-logs.db"
+#DB_FILE = "logs.db"
 
-app = modal.App("discord-bot-datasette")
+#app = modal.App("discord-bot-datasette")
+app = modal.App("discord-bot-logs-feed")
+
 
 # Create an image with Datasette and its dependencies
 image = modal.Image.debian_slim().pip_install(
@@ -15,6 +18,7 @@ image = modal.Image.debian_slim().pip_install(
 
 # Use the same volume name as modal_discord_bot.py ("discord-logs")
 db_storage = modal.Volume.from_name("discord-logs", create_if_missing=True)
+
 
 # Mount the database directory at the same path as modal_discord_bot.py ("/data/db")
 @app.function(

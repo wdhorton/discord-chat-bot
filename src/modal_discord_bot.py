@@ -14,6 +14,8 @@ Key Features:
 - Asynchronous request handling for better performance
 - Discord interaction authentication
 - OpenAI API integration with rate limiting and error handling
+- Comprehensive logging of interactions and token usage
+- User feedback collection and storage
 
 Requirements:
 - Modal deployment setup with appropriate secrets:
@@ -35,11 +37,12 @@ For detailed setup instructions, see the documentation below.
 import json
 import sqlite3
 import datetime
+import time  # Import for tracking start and end times
 from enum import Enum
 
 import modal
 from vector_emb import answer_question, SYSTEM_PROMPT, COMPLETION_MODEL
-from database import log_interaction, init_db, get_db_path
+from database import log_interaction, init_db, get_db_path, log_track_interaction, get_all_logs_stats
 
 image = (modal.Image.debian_slim(python_version="3.11").pip_install(
     "fastapi[standard]==0.115.9", "pynacl~=1.5.0", "requests~=2.32.3", "openai~=1.75.0",
@@ -70,8 +73,6 @@ async def fetch_api(question: str) -> str:
         - Limited to 500 tokens for concise answers
         - Handles API errors gracefully with formatted error messages
     """
-    
-
     client = AsyncOpenAI()
 
     try:
@@ -94,10 +95,28 @@ async def fetch_api(question: str) -> str:
         )
         
         message = response.choices[0].message.content
+        
+        # Return both the message and tokens used for logging purposes
+        context_info = {
+            "context_tokens": response.usage.prompt_tokens if hasattr(response, 'usage') else 0,
+            "completion_tokens": response.usage.completion_tokens if hasattr(response, 'usage') else 0,
+            "embedding_tokens": 1536,  # Estimate based on embedding dimensions
+            "num_chunks": 1,
+            "chunks": []  # Empty for now, could be populated with actual chunks later
+        }
+        
+        return message, context_info
     except Exception as e:
         message = f"# 🤖: Oops! {e}"
-
-    return message
+        # Return empty context_info in case of error
+        context_info = {
+            "context_tokens": 0,
+            "completion_tokens": 0,
+            "embedding_tokens": 0,
+            "num_chunks": 0,
+            "chunks": []
+        }
+        return message, context_info
 
 @app.local_entrypoint()
 def test_fetch_api():
@@ -156,7 +175,9 @@ async def reply(app_id: str, interaction_token: str, question: str):
     message_id = None
     try:
         init_db() # Initialize DB within the function context
-        message = await fetch_api.local(question)
+        start_time = time.time()  # Track start time
+        message, context_info = await fetch_api.local(question)
+        end_time = time.time()  # Track end time
         print(f"🤖 Got response from ChatGPT: {message[:100]}...")
         
         # Create a payload with the message and feedback buttons
@@ -211,18 +232,32 @@ async def reply(app_id: str, interaction_token: str, question: str):
         print("🤖 Logging interaction")
         # Ensure the volume is reloaded if needed for the write operation
         logs_db_storage.reload() 
-        interaction_id = log_interaction(
-            user_id=interaction_token, # timestamp is handled internally
+        
+        # Log interaction to the regular interactions table for Discord data
+        regular_interaction_id = log_interaction(
+            user_id=interaction_token,
             channel_id=app_id,
             question=question,
-            response=message, # Use the potentially modified message
-            feedback=None,
-            thread_id=message_id if message_id else interaction_token  # Store message_id in thread_id field
+            response=message,
+            thread_id=message_id
         )
-        print(f"🤖 Interaction logged with ID {interaction_id}, associated with message ID: {message_id}")
+        
+        # Log to the track_db logs table with detailed information
+        track_interaction_id = log_track_interaction(
+            question=question,
+            response=message,
+            context_info=context_info,
+            model=COMPLETION_MODEL,
+            start_time=start_time,
+            end_time=end_time
+        )
+        
+        print(f"🤖 Regular interaction logged with ID {regular_interaction_id}")
+        print(f"🤖 Track interaction logged with ID {track_interaction_id}")
+        
         # Persist changes made to the volume
         logs_db_storage.commit() 
-        return interaction_id
+        return regular_interaction_id
 
 
 @app.function(
